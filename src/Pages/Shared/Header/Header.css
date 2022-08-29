@@ -1,0 +1,7 @@
+.menu a,.logo {
+    color: #fff;
+}
+.menu a:hover {
+    text-decoration: underline;
+    background: none;
+}
