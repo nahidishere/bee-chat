@@ -1,60 +1,78 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import bean from "../../../assets/man-vs-bee.jpg";
+import { useForm } from "react-hook-form";
 
 const Login = () => {
+  const {
+    register,
+    handleSubmit,
+    watch,
+    formState: { errors },
+  } = useForm();
+  const onSubmit = (data) => console.log(data);
   return (
     <section
       style={{ backgroundColor: "#5865F2" }}
       className="flex items-center min-h-screen justify-center"
     >
       <div className="w-3/4">
-        <div class="hero" style={{ backgroundColor: "#36393F" }}>
-          <div class="hero-content flex-col lg:flex-row-reverse">
-            <div class="text-center lg:text-left">
+        <div className="hero" style={{ backgroundColor: "#36393F" }}>
+          <div className="hero-content flex-col lg:flex-row-reverse">
+            <div className="text-center lg:text-left">
               <div>
                 <img src={bean} alt="man-vs-bee" />
               </div>
               <h4 className="text-xl text-white my-2">Chat with bee-chat</h4>
             </div>
-            <div class="card flex-shrink-0 w-full max-w-sm">
-              <div class="card-body">
+            <div className="card flex-shrink-0 w-full max-w-sm">
+              <div className="card-body">
                 <div className="text-center">
                   <h2 className="text-2xl text-white">Welcome back!</h2>
                   <p className="text-slate-300">
                     We're so exited to see you again!
                   </p>
                 </div>
-                <form>
-                  <div class="form-control">
-                    <label class="label">
-                      <span class="label-text text-slate-300">Your Email</span>
+                <form onSubmit={handleSubmit(onSubmit)}>
+                  {/* include validation with required or other standard HTML validation rules */}
+                  <div className="form-control my-5">
+                    <label className="label">
+                      <span className="label-text text-slate-300">
+                        Your Email
+                      </span>
                     </label>
                     <input
                       type="email"
-                      placeholder="email"
-                      class="input input-bordered"
+                      placeholder="Email"
+                      name="email"
+                      className="input input-bordered"
+                      {...register("name")}
                     />
                   </div>
-                  <div class="form-control">
-                    <label class="label">
-                      <span class="label-text text-slate-300">
+                  {/* Password  */}
+                  <div className="form-control my-5">
+                    <label className="label">
+                      <span className="label-text text-slate-300">
                         Your Password
                       </span>
                     </label>
                     <input
-                      type="password"
-                      placeholder="password"
-                      class="input input-bordered"
+                      type="text"
+                      placeholder="Password"
+                      name="password"
+                      className="input input-bordered"
+                      {...register("password")}
                     />
-                    <label className="my-2 hover:underline">
-                      <Link to="/" className="text-cyan-400">
-                        Forgot password?
-                      </Link>
-                    </label>
                   </div>
-                  <div class="form-control mt-6">
-                    <button class="btn btn-primary">Login</button>
+                  {/* errors will return when field validation fails  */}
+                  {errors.exampleRequired && (
+                    <span>This field is required</span>
+                  )}
+
+                  <div className="form-control my-5">
+                    <button type="submit" className="btn btn-primary">
+                      Login
+                    </button>
                   </div>
                 </form>
                 <p className="hover:underline">

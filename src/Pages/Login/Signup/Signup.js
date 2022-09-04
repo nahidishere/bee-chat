@@ -1,8 +1,22 @@
+import { createUserWithEmailAndPassword } from "firebase/auth";
 import React, { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+import auth from "../../../firebase.init";
+import { useForm } from "react-hook-form";
 
 const Signup = () => {
-  const [isChecked, setIsChecked] = useState(false);
+  const [isChecked, setIsChecked] = useState(true);
+  const [user, setUser] = useState({});
+  const navigate = useNavigate();
+  const {
+    register,
+    handleSubmit,
+    watch,
+    formState: { errors },
+  } = useForm();
+  const onSubmit = (data) => {
+    console.log(data);
+  };
   return (
     <section
       className="flex justify-center items-center min-h-screen"
@@ -13,53 +27,71 @@ const Signup = () => {
         style={{ backgroundColor: "#36393F" }}
       >
         <h2 className="text-2xl text-center text-white">Create an account</h2>
-        <form>
-          <div class="form-control my-5">
-            <label class="label">
-              <span class="label-text text-slate-300">Your Name</span>
+        {/* Hola  */}
+        <form onSubmit={handleSubmit(onSubmit)}>
+          {/* register your input into the hook by invoking the "register" function */}
+          <div className="form-control my-5">
+            <label className="label">
+              <span className="label-text text-slate-300">Your Name</span>
             </label>
             <input
               type="text"
               placeholder="Name"
-              class="input input-bordered"
+              name="name"
+              className="input input-bordered"
+              {...register("name")}
             />
           </div>
-          <div class="form-control my-5">
-            <label class="label">
-              <span class="label-text text-slate-200">Your Email</span>
+
+          {/* include validation with required or other standard HTML validation rules */}
+          <div className="form-control my-5">
+            <label className="label">
+              <span className="label-text text-slate-300">Your Email</span>
             </label>
             <input
               type="email"
-              placeholder="email"
-              class="input input-bordered"
+              placeholder="Email"
+              name="email"
+              className="input input-bordered"
+              {...register("email")}
             />
           </div>
-          <div class="form-control my-5">
-            <label class="label">
-              <span class="label-text text-slate-200">Your Password</span>
+          {/* Password  */}
+          <div className="form-control my-5">
+            <label className="label">
+              <span className="label-text text-slate-300">Your Password</span>
             </label>
             <input
               type="password"
-              placeholder="password"
-              class="input input-bordered"
+              placeholder="Password"
+              name="password"
+              className="input input-bordered"
+              {...register("password")}
             />
           </div>
-          <div class="form-control w-2/5 my-5">
-            <label class="label cursor-pointer" onClick={!isChecked}>
-              <span class="label-text text-slate-200">
+          {/* Terms and Conditions */}
+          <div className="form-control w-2/5 my-5">
+            <label className="label cursor-pointer">
+              <span className="label-text text-slate-200">
                 I accept the terms and condition.
               </span>
               <input
                 type="checkbox"
-                checked="checked"
-                class="checkbox-accent cursor-pointer"
+                checked={isChecked}
+                className="checkbox-accent cursor-pointer"
               />
             </label>
           </div>
-          <div class="form-control my-5">
-            <button class="btn btn-primary">Signup</button>
+          {/* errors will return when field validation fails  */}
+          {errors.exampleRequired && <span>This field is required</span>}
+
+          <div className="form-control my-5">
+            <button type="submit" className="btn btn-primary">
+              Sign up
+            </button>
           </div>
         </form>
+        {/* HOla  */}
         <p className="my-2 hover:underline">
           <Link to="/login" className="text-cyan-400">
             Already have an account?

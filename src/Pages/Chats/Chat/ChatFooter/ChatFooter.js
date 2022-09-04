@@ -1,0 +1,45 @@
+import { addDoc, collection, serverTimestamp } from "firebase/firestore";
+import React, { useState } from "react";
+import { AiOutlineMeh, AiOutlineSend, AiOutlineAudio } from "react-icons/ai";
+import { db } from "../../../../firebase.init";
+
+const ChatFooter = ({ chatId }) => {
+  const [messageInput, setMessageInput] = useState("");
+  const sendMessage = async (e) => {
+    e.preventDefault();
+    if (messageInput === "") {
+      return alert("Please type your message");
+    }
+    try {
+      const sendData = await addDoc(
+        collection(db, "groups", chatId, "messages"),
+        {
+          name: "nahid",
+          message: messageInput,
+          timestamp: serverTimestamp(),
+        }
+      );
+      console.log("Document written with ID: ", sendData.id);
+    } catch (e) {
+      console.error("Error adding document: ", e);
+    }
+    setMessageInput("");
+  };
+  return (
+    <div className="flex text-2xl items-center justify-between p-2">
+      <AiOutlineMeh style={{ fontSize: "35px" }} />
+      <input
+        value={messageInput}
+        onChange={(e) => setMessageInput(e.target.value)}
+        type="text"
+        placeholder="Type here"
+        className="input input-bordered input-accent w-full mx-2"
+      />
+      <button onClick={sendMessage}>
+        <AiOutlineSend />
+      </button>
+    </div>
+  );
+};
+
+export default ChatFooter;
