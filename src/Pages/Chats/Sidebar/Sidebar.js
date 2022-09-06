@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { collection, getDocs, onSnapshot } from "firebase/firestore";
+import { signOut } from "firebase/auth";
 import nahid from "../../../assets/nahid.jpg";
 import {
   AiOutlineReload,
@@ -8,10 +9,14 @@ import {
   AiOutlineSearch,
 } from "react-icons/ai";
 import SidebarChat from "./SidebarChat/SidebarChat";
-import { db } from "../../../firebase.init";
+import auth, { db } from "../../../firebase.init";
+import { useAuthState } from "react-firebase-hooks/auth";
+import Loading from "../../Shared/Loading/Loading";
+import { Link } from "react-router-dom";
 
 const Sidebar = () => {
   const [group, setGroup] = useState([]);
+  const [user, loading, error] = useAuthState(auth);
   // Get Groups
   const getGroups = () => {
     const getData = onSnapshot(collection(db, "groups"), (snapshot) => {
@@ -28,20 +33,49 @@ const Sidebar = () => {
   useEffect(() => {
     getGroups();
   }, []);
+  // Logout
+  const handleLogout = () => {
+    signOut(auth);
+  };
+  if (loading) {
+    return <Loading />;
+  }
   return (
     <section className="w-4/12">
       <div>
         {/* Sidebar Header  */}
         <div className="sidebar-header border-r-2 border-gray-300 flex justify-between p-2.5">
-          <div className="avatar">
-            <div className="w-14 rounded-full">
-              <img src={nahid} alt="Nahid" />
+          <div className="flex items-center">
+            <div className="avatar mr-2">
+              <div className="w-14 rounded-full">
+                <img src={nahid} alt="Nahid" />
+              </div>
             </div>
+            <h2 className="text-xl">{user?.displayName}</h2>
           </div>
           <div className="flex text-2xl p-2">
-            <AiOutlineReload />
-            <AiOutlineMore />
-            <AiFillMessage />
+            <ul className="menu-horizontal items-center rounded-box bg">
+              <li>
+                <Link to="/" className="text-black">
+                  <AiOutlineReload />
+                </Link>
+              </li>
+              <li>
+                <Link to="/">
+                  <AiOutlineMore />
+                </Link>
+              </li>
+              <li>
+                <Link to="/">
+                  <AiFillMessage />
+                </Link>
+              </li>
+              <li>
+                <button onClick={handleLogout} className="btn btn-outline ml-2">
+                  Logout
+                </button>
+              </li>
+            </ul>
           </div>
         </div>
         {/* Sidebar Search  */}

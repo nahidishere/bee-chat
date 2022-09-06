@@ -5,6 +5,7 @@ import {
   AiOutlinePaperClip,
   AiOutlineMore,
 } from "react-icons/ai";
+import { Link } from "react-router-dom";
 
 const ChatHeader = ({ groupData }) => {
   return (
@@ -21,9 +22,23 @@ const ChatHeader = ({ groupData }) => {
         </div>
       </div>
       <div className="flex text-2xl p-2">
-        <AiOutlineSearch />
-        <AiOutlinePaperClip />
-        <AiOutlineMore />
+        <ul className="menu-horizontal items-center rounded-box bg">
+          <li>
+            <Link to="/" className="text-black">
+              <AiOutlineSearch />
+            </Link>
+          </li>
+          <li>
+            <Link to="/">
+              <AiOutlinePaperClip />
+            </Link>
+          </li>
+          <li>
+            <Link to="/">
+              <AiOutlineMore />
+            </Link>
+          </li>
+        </ul>
       </div>
     </div>
   );

@@ -1,22 +1,44 @@
-import { createUserWithEmailAndPassword } from "firebase/auth";
+import {
+  useAuthState,
+  useCreateUserWithEmailAndPassword,
+  useUpdateProfile,
+} from "react-firebase-hooks/auth";
 import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import auth from "../../../firebase.init";
 import { useForm } from "react-hook-form";
+import Loading from "../../Shared/Loading/Loading";
 
 const Signup = () => {
   const [isChecked, setIsChecked] = useState(true);
-  const [user, setUser] = useState({});
   const navigate = useNavigate();
   const {
     register,
     handleSubmit,
     watch,
+    reset,
     formState: { errors },
   } = useForm();
-  const onSubmit = (data) => {
-    console.log(data);
+  const [user1, loading1, error1] = useAuthState(auth);
+  const [createUserWithEmailAndPassword, user, loading, error] =
+    useCreateUserWithEmailAndPassword(auth);
+  const [updateProfile, updating, updateError] = useUpdateProfile(auth);
+  const onSubmit = async (data) => {
+    const name = data.name;
+    const email = data.email;
+    const password = data.password;
+    await createUserWithEmailAndPassword(email, password);
+    await updateProfile({ displayName: name });
   };
+  if (loading || loading1) {
+    return <Loading />;
+  }
+  if (user) {
+    navigate("/");
+  }
+  if (user) {
+    console.log(user);
+  }
   return (
     <section
       className="flex justify-center items-center min-h-screen"
