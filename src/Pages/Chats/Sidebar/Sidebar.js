@@ -5,8 +5,8 @@ import nahid from "../../../assets/nahid.jpg";
 import {
   AiOutlineReload,
   AiOutlineMore,
-  AiFillMessage,
   AiOutlineSearch,
+  AiOutlineLogout,
 } from "react-icons/ai";
 import SidebarChat from "./SidebarChat/SidebarChat";
 import auth, { db } from "../../../firebase.init";
@@ -46,9 +46,9 @@ const Sidebar = () => {
       <div className="h-2/6">
         <div className="sidebar-header border-r-2 border-gray-300 flex justify-between p-2.5">
           <div className="flex items-center">
-            <div className="avatar mr-2">
-              <div className="w-14 rounded-full">
-                <img src={nahid} alt="Nahid" />
+            <div className="avatar placeholder mr-2">
+              <div className="w-14 rounded-full bg-neutral-focus text-neutral-content">
+                <span>{user?.displayName?.split(" ")[0].toString(5)}</span>
               </div>
             </div>
             <h2 className="text-xl">{user?.displayName}</h2>
@@ -66,13 +66,8 @@ const Sidebar = () => {
                 </Link>
               </li>
               <li>
-                <Link to="/">
-                  <AiFillMessage />
-                </Link>
-              </li>
-              <li>
-                <button onClick={handleLogout} className="btn btn-outline ml-2">
-                  Logout
+                <button onClick={handleLogout}>
+                  <AiOutlineLogout />
                 </button>
               </li>
             </ul>

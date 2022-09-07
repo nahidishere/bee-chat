@@ -19,14 +19,17 @@ const ChatFooter = ({ chatId }) => {
           timestamp: serverTimestamp(),
         }
       );
-      console.log("Document written with ID: ", sendData.id);
+      // console.log("Document written with ID: ", sendData.id);
     } catch (e) {
-      console.error("Error adding document: ", e);
+      // console.error("Error adding document: ", e);
     }
     setMessageInput("");
   };
   return (
-    <div className="flex text-2xl items-center justify-between p-2 h-1/6">
+    <form
+      onSubmit={sendMessage}
+      className="flex text-2xl items-center justify-between p-2 h-1/6"
+    >
       <AiOutlineMeh style={{ fontSize: "35px" }} />
       <input
         value={messageInput}
@@ -35,10 +38,10 @@ const ChatFooter = ({ chatId }) => {
         placeholder="Type here"
         className="input input-bordered input-accent w-full mx-2"
       />
-      <button onClick={sendMessage}>
+      <button type="submit">
         <AiOutlineSend />
       </button>
-    </div>
+    </form>
   );
 };
 

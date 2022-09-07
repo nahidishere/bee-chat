@@ -17,6 +17,10 @@ const Chat = () => {
       });
     }
   }, [chatId]);
+  const location = window.location.href;
+  if (location === "https://bee-chat-5a6ed.web.app/") {
+    return;
+  }
   return (
     <div className="w-8/12 h-screen flex flex-col">
       <ChatHeader groupData={groupData} />

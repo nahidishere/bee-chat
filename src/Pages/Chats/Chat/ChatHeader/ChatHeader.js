@@ -1,5 +1,4 @@
-import React, { useEffect, useState } from "react";
-import nahid from "../../../../assets/nahid.jpg";
+import React from "react";
 import {
   AiOutlineSearch,
   AiOutlinePaperClip,
@@ -8,12 +7,13 @@ import {
 import { Link } from "react-router-dom";
 
 const ChatHeader = ({ groupData }) => {
+  const gName = groupData?.name?.split(" ")[0];
   return (
     <div className="flex h-1/6 p-5 border-b border-gray-300">
       <div className="flex flex-1 items-center">
-        <div className="avatar mr-2">
-          <div className="w-14 rounded-full">
-            <img src={nahid} alt="Nahid" />
+        <div className="avatar placeholder mr-2">
+          <div className="w-14 rounded-full bg-neutral-focus text-neutral-content">
+            <span class="text-3xl">{gName?.substring(0, 3)}</span>
           </div>
         </div>
         <div>
