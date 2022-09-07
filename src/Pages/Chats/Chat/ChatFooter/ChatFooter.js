@@ -26,7 +26,7 @@ const ChatFooter = ({ chatId }) => {
     setMessageInput("");
   };
   return (
-    <div className="flex text-2xl items-center justify-between p-2">
+    <div className="flex text-2xl items-center justify-between p-2 h-1/6">
       <AiOutlineMeh style={{ fontSize: "35px" }} />
       <input
         value={messageInput}

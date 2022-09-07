@@ -30,14 +30,11 @@ const Login = () => {
     signInWithEmailAndPassword(email, password);
     reset();
   };
-  if (loading) {
+  if (loading || loading1) {
     return <Loading />;
   }
   if (user1) {
     navigate("/");
-  }
-  if (user) {
-    console.log(user);
   }
   return (
     <section

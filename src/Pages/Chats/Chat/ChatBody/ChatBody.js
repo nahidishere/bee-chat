@@ -2,6 +2,7 @@ import { collection, onSnapshot, orderBy, query } from "firebase/firestore";
 import React, { useEffect, useState } from "react";
 import { db } from "../../../../firebase.init";
 import Messages from "./Messages/Messages";
+import whatsapp from "../../../../assets/whatsapp-bg.png";
 
 const ChatBody = ({ chatId }) => {
   const [messages, setMessages] = useState([]);
@@ -22,7 +23,10 @@ const ChatBody = ({ chatId }) => {
     }
   }, [chatId]);
   return (
-    <div style={{ height: "500px" }} className="overflow-scroll">
+    <div
+      style={{ backgroundImage: `url(${whatsapp})` }}
+      className="overflow-scroll h-4/6"
+    >
       {messages?.map((message) => (
         <Messages message={message} />
       ))}

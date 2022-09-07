@@ -4,7 +4,6 @@ import { Routes, Route } from "react-router-dom";
 import Login from "./Pages/Login/Login/Login";
 import Signup from "./Pages/Login/Signup/Signup";
 import Chats from "./Pages/Chats/Chats";
-import RequireAuth from "./Pages/Login/RequireAuth/RequireAuth";
 
 function App() {
   return (

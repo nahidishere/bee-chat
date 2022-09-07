@@ -1,12 +1,8 @@
 import React from "react";
-import whatsapp from "../../../../../assets/whatsapp-bg.png";
 
 const Messages = ({ message }) => {
   return (
-    <div
-      className="flex-1 overflow-auto flex flex-col"
-      style={{ backgroundImage: `url(${whatsapp})` }}
-    >
+    <div className="flex-1 overflow-auto flex flex-col">
       <div
         className={`chat-message ml-2 p-2 ${
           message?.name === "kiran" ? "ml-auto" : ""

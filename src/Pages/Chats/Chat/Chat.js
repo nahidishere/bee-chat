@@ -18,7 +18,7 @@ const Chat = () => {
     }
   }, [chatId]);
   return (
-    <div className="w-8/12 flex flex-col">
+    <div className="w-8/12 h-screen flex flex-col">
       <ChatHeader groupData={groupData} />
       <ChatBody chatId={chatId} />
       <ChatFooter chatId={chatId} />

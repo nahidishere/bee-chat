@@ -30,14 +30,11 @@ const Signup = () => {
     await createUserWithEmailAndPassword(email, password);
     await updateProfile({ displayName: name });
   };
-  if (loading || loading1) {
+  if (loading || loading1 || updating) {
     return <Loading />;
   }
   if (user) {
     navigate("/");
-  }
-  if (user) {
-    console.log(user);
   }
   return (
     <section

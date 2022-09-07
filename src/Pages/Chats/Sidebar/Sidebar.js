@@ -41,9 +41,9 @@ const Sidebar = () => {
     return <Loading />;
   }
   return (
-    <section className="w-4/12">
-      <div>
-        {/* Sidebar Header  */}
+    <section className="w-4/12 h-screen">
+      {/* Sidebar Header  */}
+      <div className="h-2/6">
         <div className="sidebar-header border-r-2 border-gray-300 flex justify-between p-2.5">
           <div className="flex items-center">
             <div className="avatar mr-2">
@@ -95,13 +95,16 @@ const Sidebar = () => {
             </div>
           </div>
         </div>
-        {/* Messages  */}
-        <div className="overflow-auto" style={{ maxHeight: "530px" }}>
+        {/* Create New Chat  */}
+        <div className="create-new-chat">
           <SidebarChat addNewChat />
-          {group.map((g) => (
-            <SidebarChat key={g.id} id={g.id} group={g} />
-          ))}
         </div>
+      </div>
+      {/* Messages  */}
+      <div className="h-4/6 overflow-auto">
+        {group.map((g) => (
+          <SidebarChat key={g.id} id={g.id} group={g} />
+        ))}
       </div>
     </section>
   );

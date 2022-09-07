@@ -9,7 +9,7 @@ import { Link } from "react-router-dom";
 
 const ChatHeader = ({ groupData }) => {
   return (
-    <div className="flex p-5 border-b border-gray-300">
+    <div className="flex h-1/6 p-5 border-b border-gray-300">
       <div className="flex flex-1 items-center">
         <div className="avatar mr-2">
           <div className="w-14 rounded-full">
