@@ -4,7 +4,10 @@ import cantFind from "../../../assets/404.png";
 
 const NotFound = () => {
   return (
-    <div className="hero min-h-screen bg-base-200">
+    <div
+      className="hero min-h-screen bg-base-200"
+      style={{ backgroundColor: "#5865F2" }}
+    >
       <div className="hero-content flex-col lg:flex-row">
         <img
           src={cantFind}

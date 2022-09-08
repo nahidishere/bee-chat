@@ -18,7 +18,7 @@ const Chat = () => {
     }
   }, [chatId]);
   const location = window.location.href;
-  if (location === "http://localhost:3000/") {
+  if (location === "https://bee-chat-5a6ed.web.app/") {
     return;
   }
   return (

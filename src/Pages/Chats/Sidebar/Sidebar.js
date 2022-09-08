@@ -12,11 +12,12 @@ import SidebarChat from "./SidebarChat/SidebarChat";
 import auth, { db } from "../../../firebase.init";
 import { useAuthState } from "react-firebase-hooks/auth";
 import Loading from "../../Shared/Loading/Loading";
-import { Link } from "react-router-dom";
+import { Link, Navigate, useNavigate } from "react-router-dom";
 
 const Sidebar = () => {
   const [group, setGroup] = useState([]);
   const [user, loading, error] = useAuthState(auth);
+  const navigate = useNavigate();
   // Get Groups
   const getGroups = () => {
     const getData = onSnapshot(collection(db, "groups"), (snapshot) => {
@@ -36,6 +37,7 @@ const Sidebar = () => {
   // Logout
   const handleLogout = () => {
     signOut(auth);
+    navigate("/");
   };
   if (loading) {
     return <Loading />;
