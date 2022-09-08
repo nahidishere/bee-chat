@@ -1,10 +1,12 @@
 import { addDoc, collection, serverTimestamp } from "firebase/firestore";
 import React, { useState } from "react";
+import { useAuthState } from "react-firebase-hooks/auth";
 import { AiOutlineMeh, AiOutlineSend, AiOutlineAudio } from "react-icons/ai";
-import { db } from "../../../../firebase.init";
+import auth, { db } from "../../../../firebase.init";
 
 const ChatFooter = ({ chatId }) => {
   const [messageInput, setMessageInput] = useState("");
+  const [user, loading, error] = useAuthState(auth);
   const sendMessage = async (e) => {
     e.preventDefault();
     if (messageInput === "") {
@@ -14,7 +16,8 @@ const ChatFooter = ({ chatId }) => {
       const sendData = await addDoc(
         collection(db, "groups", chatId, "messages"),
         {
-          name: "nahid",
+          name: user?.displayName,
+          email: user?.email,
           message: messageInput,
           timestamp: serverTimestamp(),
         }

@@ -13,7 +13,7 @@ const ChatHeader = ({ groupData }) => {
       <div className="flex flex-1 items-center">
         <div className="avatar placeholder mr-2">
           <div className="w-14 rounded-full bg-neutral-focus text-neutral-content">
-            <span class="text-3xl">{gName?.substring(0, 3)}</span>
+            <span className="text-3xl">{gName?.substring(0, 3)}</span>
           </div>
         </div>
         <div>

@@ -32,7 +32,7 @@ const Sidebar = () => {
   };
   useEffect(() => {
     getGroups();
-  }, []);
+  }, [user]);
   // Logout
   const handleLogout = () => {
     signOut(auth);
