@@ -39,7 +39,7 @@ const Header = () => {
             </ul>
           </div>
           <Link to="/" className="btn logo btn-ghost normal-case text-xl">
-            BEWITH
+            BE-CHAT
           </Link>
         </div>
         <div className="navbar-center hidden lg:flex">
